@@ -7,6 +7,21 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def train_epoch(gen, disc, gen_opt, disc_opt, loss_fn, 
                 data_ldr, batch_sz, noise_dim):
+    """
+    Train individual epoch for both generator and discriminator
+    
+    Input:   gen       - generator model
+             disc      - discriminator model
+             gen_opt   - generator optimizer
+             disc_opt  - discriminator optimizer
+             loss_fn   - loss function
+             data_ldr  - data loader
+             batch_sz  - batch size for data loader (int)
+             noise_dim - dimension of input noise to generator (int)
+                       
+    Returns: generator loss
+             discriminator loss
+    """  
     gen.train()
     disc.train()
     disc_epoch_loss = list()
@@ -53,6 +68,19 @@ def train_epoch(gen, disc, gen_opt, disc_opt, loss_fn,
     return ge_loss, de_loss
 
 def train_vanilla_gan(dataloader, epochs=100, samples_to_plot=6, batch_sz=128, noise_dim=100):
+    """
+    Trains vanilla GAN
+    
+    Input:   dataloader      - torch data loader
+             epochs          - number of epochs to train (int)
+             samples_to_plot - at each epoch (int)
+             batch_sz        - for data loader (int)
+             noise_dim       - for inputted noise to generator (int)
+                       
+    Returns: generator
+             generator loss
+             discriminator loss
+    """  
     #Setup
     gen = Generator(noise_dim).to(device)
     disc = Discriminator().to(device)

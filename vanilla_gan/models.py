@@ -2,6 +2,13 @@ import torch
 import torch.nn as nn
 
 class Generator(nn.Module):
+    """
+    Generator for GAN
+    
+    Input: noise_dim - length of input noise (int)
+   
+    """   
+
     def __init__(self, noise_dim):
         super(Generator, self).__init__()
         self.discriminator = nn.Sequential(
@@ -24,6 +31,9 @@ class Generator(nn.Module):
         return self.discriminator(x)
 
 class Discriminator(nn.Module):
+    """
+    Discriminator for GAN.   
+    """   
     def __init__(self):
         super(Discriminator, self).__init__()
         self.generator = nn.Sequential(

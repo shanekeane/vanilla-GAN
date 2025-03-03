@@ -6,6 +6,15 @@ from torch.utils.data import DataLoader, Dataset
 import matplotlib.cm as cm
 
 def plot_samples(model, no_samples, noise_dim):
+    """
+    Plots horizontal array of samples
+    
+    Input:  model      - generator model
+            no_samples - how many samples to print (int)
+            noise_dim  - dimension of generator input noise (int)
+   
+    """   
+
     model.eval()
     gen_noise = torch.randn(no_samples, noise_dim)
     gen_images = model(gen_noise)
@@ -17,6 +26,16 @@ def plot_samples(model, no_samples, noise_dim):
     plt.show()
 
 def load_data(data="mnist", batch_size=128):
+    """
+    Returns data loader for MNIST or Fashion MNIST
+    
+    Input:  data       - "mnist" or "fmnist"
+            batch_size - batch size for data loader
+
+    Output: data loader
+   
+    """   
+
     #Load training and testing data
     if data=="mnist":
         train_data = datasets.MNIST(root="data", train=True, download=True, transform=ToTensor())
